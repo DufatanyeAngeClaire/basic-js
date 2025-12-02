@@ -47,7 +47,10 @@ console.log(cleaned, replaced, splitWords);
 
 // 5. KGL Data Formatting Task
 
-// Final formatted message for database
-const finalRecord = `Name: ${Name} | Location: ${location} | Service: ${service}`;
+let cleanName = Name.trim().toUpperCase();
+let cleanLocation = location.trim();
+let cleanService = service.trim().toLowerCase();
+
+const finalRecord = `Name: ${cleanName} | Location: ${cleanLocation} | Service: ${cleanService}`;
 
 console.log(finalRecord);
