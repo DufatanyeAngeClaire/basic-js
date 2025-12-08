@@ -11,9 +11,6 @@ const Detail =
 
 console.log(Detail);
 
-
-console.log(Detail);
-
 //   2.Template Literal Practice
 
 const template = `Name: ${Name} | Location: ${location} | Service: ${service}`;
