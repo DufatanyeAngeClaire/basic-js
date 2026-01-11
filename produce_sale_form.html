@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Produce Sales</title>
+
+    <!-- OFFLINE BOOTSTRAP -->
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+<!-- NAVBAR (reuse same navbar code as dashboard) -->
+<nav class="navbar navbar-expand-lg bg-success shadow-sm py-3">
+    <div class="container d-flex align-items-center justify-content-between">
+
+        <a class="d-flex align-items-center text-white text-decoration-none" href="dashboard.html">
+            <img src="/assets/image/no background.png" alt="KGL Logo" width="50" height="50" class="rounded-circle me-2 shadow-sm">
+            <span class="fw-bold fs-5 text-white">Karibu Groceries LTD</span>
+        </a>
+
+        <div class="d-flex align-items-center">
+            <a href="dashboard.html" class="nav-link text-white px-3">Dashboard</a>
+            <a href="procurement.html" class="nav-link text-white px-3">Procurement</a>
+            <a href="sales.html" class="nav-link text-white px-3 active">Sales</a>
+            <a href="credit-sales.html" class="nav-link text-white px-3">Credit Sales</a>
+            <a href="reports.html" class="nav-link text-white px-3">Reports</a>
+        </div>
+
+    </div>
+</nav>
+
+<!-- PAGE TITLE -->
+<div class="container mt-4 text-center">
+    <h3 class="fw-bold text-success">Produce Sales</h3>
+    <p class="text-muted">Record a new sale in the system</p>
+</div>
+
+<!-- SALES FORM -->
+<div class="container mt-4">
+    <div class="card shadow p-4 mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-success text-white fw-bold text-center">
+            Record Sale
+        </div>
+        <div class="card-body">
+
+            <form id="salesForm" novalidate>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="saleProduceName" class="form-label">Produce Name</label>
+                        <input type="text" class="form-control" id="saleProduceName" placeholder="e.g., Beans">
+                        <div class="invalid-feedback">Produce Name is required (min 2 characters).</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="saleTonnage" class="form-label">Tonnage (KG)</label>
+                        <input type="number" class="form-control" id="saleTonnage" placeholder="e.g., 500">
+                        <div class="invalid-feedback">Tonnage must be at least 1 KG.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="amountPaid" class="form-label">Amount Paid (UGX)</label>
+                        <input type="number" class="form-control" id="amountPaid" placeholder="e.g., 500000">
+                        <div class="invalid-feedback">Amount Paid must be at least 5 digits.</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="buyerName" class="form-label">Buyer Name</label>
+                        <input type="text" class="form-control" id="buyerName" placeholder="e.g., Jane Doe">
+                        <div class="invalid-feedback">Buyer Name is required (min 2 characters).</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="salesAgent" class="form-label">Sales Agent</label>
+                        <input type="text" class="form-control" id="salesAgent" placeholder="e.g., Peter">
+                        <div class="invalid-feedback">Sales Agent name is required (min 2 characters).</div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="saleDateTime" class="form-label">Date & Time</label>
+                        <input type="datetime-local" class="form-control" id="saleDateTime">
+                        <div class="invalid-feedback">Please select date and time of sale.</div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success btn-lg w-100 mt-4 shadow-sm">
+                    <i class="bi bi-bag-check me-2"></i> Complete Sale
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center text-muted mt-5 mb-3">
+    &copy; 2026 Karibu Groceries LTD
+</footer>
+
+<!-- BOOTSTRAP JS -->
+<script src="css/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- FORM VALIDATION JS -->
+<script>
+    const salesForm = document.getElementById('salesForm');
+
+    salesForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        Array.from(salesForm.elements).forEach(el => el.classList.remove('is-invalid'));
+        let valid = true;
+
+        if(salesForm.saleProduceName.value.trim().length < 2) { salesForm.saleProduceName.classList.add('is-invalid'); valid=false; }
+        if(salesForm.saleTonnage.value.trim() === '' || salesForm.saleTonnage.value <=0) { salesForm.saleTonnage.classList.add('is-invalid'); valid=false; }
+        if(salesForm.amountPaid.value.trim().length < 5) { salesForm.amountPaid.classList.add('is-invalid'); valid=false; }
+        if(salesForm.buyerName.value.trim().length < 2) { salesForm.buyerName.classList.add('is-invalid'); valid=false; }
+        if(salesForm.salesAgent.value.trim().length < 2) { salesForm.salesAgent.classList.add('is-invalid'); valid=false; }
+        if(salesForm.saleDateTime.value.trim() === '') { salesForm.saleDateTime.classList.add('is-invalid'); valid=false; }
+
+        if(valid){
+            alert('Sale recorded successfully!');
+            salesForm.reset();
+        }
+    });
+</script>
+
+</body>
+</html>
